@@ -1,21 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import { ajax } from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       repos: []
     }
-
   }
 
   search (term) {
     console.log(`${term} was searched`);
     // TODO
+    ajax({
+      url: '/repos',
+      method: 'POST',
+      data: term,
+      success: () => console.log('Posted from client')
+    })
   }
 
   render () {
