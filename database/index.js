@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/fetcher', {useMongoClient: true});
 // Schema design
 let repoSchema = new Schema({
   // TODO: your schema here!
-  repoName: {type: String, unique: true, index: true},
+  repoName: {type: String, unique: true, required: true},
   owner: String,
   url: String,
   size: Number

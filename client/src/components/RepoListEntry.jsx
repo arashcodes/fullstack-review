@@ -4,9 +4,9 @@ const RepoListEntry = (props) => {
   return(
     <li>
       {/* <span>{props.repo.repoName}</span> */}
-      <span>{props.repo.owner}</span>
-      {/* <span>{props.repo.url}</span> */}
-      <span>{props.repo.size}</span>
+      <span>{props.repo.owner} </span>
+      <span>{props.repo.url} </span>
+      <span>{props.repo.size} </span>
     </li>
   )
 }

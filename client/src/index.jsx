@@ -12,9 +12,15 @@ class App extends React.Component {
       repos: [],
       topRepos: [],
     }
+    this.getAll = this.getAll.bind(this);
   }
 
   componentDidMount() {
+    this.getAll();
+  }
+
+  getAll() {
+    console.log('-----logged')
     ajax({
       url: '/all',
       type: 'GET',
@@ -25,12 +31,19 @@ class App extends React.Component {
       }
     })
   }
+
   search(term) {
     console.log(`${term} was searched`);
     // TODO
-    axios.post('/repos', { term: term })
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+    ajax({
+      url: '/repos',
+      method: 'POST',
+      data: {term: term},
+      success: this.getAll
+    })
+    // axios.post('/repos', { term: term })
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err))
   }
 
   // topRepos() {
