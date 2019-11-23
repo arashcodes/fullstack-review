@@ -1,22 +1,35 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher', {useNewUrlParser: true});
+const Schema = mongoose.Schema;
+mongoose.connect('mongodb://localhost/fetcher', {useMongoClient: true});
 
 // Schema design
-let repoSchema = mongoose.Schema({
+let repoSchema = new Schema({
   // TODO: your schema here!
-  repoName: String,
+  repoName: {type: String, unique: true, index: true},
   owner: String,
   url: String,
-  stars: Number
+  size: Number
 });
 
 // Model
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (/* TODO */) => {
+let save = (repo) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
+  Repo.create(repo)
+}
+
+let find = (callback) => {
+  Repo.find({}, (err, data) => {
+    if (err) {
+      callback(err)
+    } else {
+      callback(null, data);
+    }
+  })
 }
 
 module.exports.save = save;
+module.exports.find = find;
